@@ -9,10 +9,12 @@ use Illuminate\Routing\Controller;
 
 class RequestController extends Controller
 {
-    // Listar todas las solicitudes paginadas
+    // Listar todas las solicitudes del id especifico y paginadas
     public function index()
     {
-        return MedicineRequest::with(['medicine', 'user'])->paginate(10);
+        return MedicineRequest::with(['medicine', 'user'])
+            ->where('user_id', Auth::id())
+            ->paginate(10);
     }
 
     // Crear una nueva solicitud
